@@ -1,0 +1,576 @@
+POST https://routes.googleapis.com/directions/v2:computeRoutes: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59567
+          },
+          "remote": {
+            "address": "172.217.24.106",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": null,
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": null,
+              "organizationalUnit": null,
+              "commonName": "upload.video.google.com",
+              "alternativeNames": "DNS:upload.video.google.com, DNS:*.clients.google.com, DNS:*.docs.google.com, DNS:*.drive.google.com, DNS:*.gdata.youtube.com, DNS:*.googleapis.com, DNS:*.photos.google.com, DNS:*.youtube-3rd-party.com, DNS:upload.google.com, DNS:*.upload.google.com, DNS:upload.youtube.com, DNS:*.upload.youtube.com, DNS:uploads.stage.gdata.youtube.com, DNS:bg-call-donation.goog, DNS:bg-call-donation-alpha.goog, DNS:bg-call-donation-canary.goog, DNS:bg-call-donation-dev.goog"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "Google Trust Services",
+              "organizationalUnit": null,
+              "commonName": "WE2"
+            },
+            "validFrom": "Sep 22 08:42:00 2025 GMT",
+            "validTo": "Dec 15 08:41:59 2025 GMT",
+            "fingerprint": "E9:4F:AE:49:69:8C:15:95:B2:F7:9C:C0:6F:DA:FF:C6:06:1A:22:46",
+            "serialNumber": "452387c747c5833d09183857a1ee6dd0"
+          }
+        }
+      },
+      "Request Headers": {
+        "content-type": "application/json",
+        "x-goog-api-key": "<GOOGLE_API_KEY>",
+        "x-goog-fieldmask": "routes.distanceMeters,routes.duration,routes.polyline.encodedPolyline,routes.staticDuration",
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "365c34fb-0cd8-469d-869d-f33d97b3dc9c",
+        "host": "routes.googleapis.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "310"
+      },
+      "Request Body": "{\n  \"origin\": { \"address\": \"Staten Island, New York, USA\" },\n  \"destination\": { \"address\": \"Queens, New York, USA\" },\n  \"travelMode\": \"DRIVE\",\n  \"routingPreference\": \"TRAFFIC_AWARE\",\n  \"computeAlternativeRoutes\": false,\n  \"routeModifiers\": { \"avoidTolls\": false, \"avoidHighways\": false },\n  \"units\": \"METRIC\"\n}",
+      "Response Headers": {
+        "content-type": "application/json; charset=UTF-8",
+        "vary": [
+          "Origin",
+          "X-Origin",
+          "Referer"
+        ],
+        "content-encoding": "gzip",
+        "date": "Fri, 10 Oct 2025 18:45:13 GMT",
+        "server": "scaffolding on HTTPServer2",
+        "x-xss-protection": "0",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "server-timing": "l2gfet4t7; dur=100",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "transfer-encoding": "chunked"
+      },
+      "Response Body": "{\n  \"routes\": [\n    {\n      \"distanceMeters\": 41311,\n      \"duration\": \"5334s\",\n      \"staticDuration\": \"2773s\",\n      \"polyline\": {\n        \"encodedPolyline\": \"kg{vFxykcMnGe@aAmYjKs@D|@GVSXYHWAWOSc@WiAG]SOSiE?gDJiDVqCNwAjBkLTaCJ}B@{BKgKgA}z@?}DJ}CT{Ch@qDn@}C`DkKnJiZxAgGn@}Df@cEX}DN_EVsXR{E^_Fl@_Fx@sEhAsEtFsRjCmK`CsKj@eD\\\\aDJmATuFB{B?uCKsBYoBcf@uxBaKud@u@uDeAkE}@qCq@{As@iAkBuBoA{@iEkBeAq@oQ}NoDeCq\\\\oXqEoDiCeBwBgAiBu@oDsAaGiBoKqC_OaE}Bg@uBQyABsAL{@R_Br@o@d@{@z@}@hAiAnBw@vA}CrGwAlCeAvAmAnA}@l@mAb@aANcADaAG_AQkAc@cAq@yAoAuLaMgIcIePyPo_BmcBqCyCmAsAaAy@qAq@wAc@}ASuAEaBHqATcC|@eClA}DzBeb@xTuB~@eA`@_@RQEcClAsCjB_D|Bk@\\\\Q@a@\\\\gAEgTaIql@aUiC}@QfAKLQx@S\\\\w@x@m@\\\\kAVoAFkAGmAQID{CaAk^}MeAo@iAiAgA}AeAuBs@oBm@aCc@_CQmBCcBDuDNiChBgTZkBf@}Ah@iAl@}@pSkUf@{@f@oA^_BN}Aj@{ZnAm`A?WO]YaB[cAe@gAk@_Au@u@w@i@cAc@uMsC_D}@kDqAcm@iYaDiBcSmLiAu@_B_BgFsFyEyGcC_EiHmM_D_GeHeNsEmJaAaBoD{FuDiIcAsCc@qBw@kEm@uDF]}AcLi@iCa@cBu@sBy@eBgAgBkMuOoCgCqB_BaMgHEYgAo@e@g@c@iAM}@?w@jBsSVsAPm@?WtAuDh@qBbCgMfAiGzA_Kb@aCl@mCv@_Ct@yAhCwDdDcGrAgCbAcCt@iCj@mCh@sDEa@TyB\\\\qHbC}k@@wCIiDUmCg@iDk@eCm@iBgAiCqEaJo@}A_AsD[kBa@aEy@uTQoCWoBy@qDyDuMgAyE}Jsf@mGkX_Pix@o@cEe@qEa@iEg@uDiAgGg@qBaCqIcB{EyC_I_JyUkGkQa@_B]kBa@yCQeCIgC@eDf@sLvBud@`@cEj@{Dj@oC`P_r@p@{DZwCVgDJ_Dz@op@N}QDgCNe@VsDLsAL{Ilg@tAZwUtHPdDYjCY\"\n      }\n    }\n  ]\n}\n"
+    }
+
+
+    'Calculated delay:', 43, 'minutes'
+
+
+    POST https://routes.googleapis.com/directions/v2:computeRoutes: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59567
+          },
+          "remote": {
+            "address": "172.217.24.106",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": null,
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": null,
+              "organizationalUnit": null,
+              "commonName": "upload.video.google.com",
+              "alternativeNames": "DNS:upload.video.google.com, DNS:*.clients.google.com, DNS:*.docs.google.com, DNS:*.drive.google.com, DNS:*.gdata.youtube.com, DNS:*.googleapis.com, DNS:*.photos.google.com, DNS:*.youtube-3rd-party.com, DNS:upload.google.com, DNS:*.upload.google.com, DNS:upload.youtube.com, DNS:*.upload.youtube.com, DNS:uploads.stage.gdata.youtube.com, DNS:bg-call-donation.goog, DNS:bg-call-donation-alpha.goog, DNS:bg-call-donation-canary.goog, DNS:bg-call-donation-dev.goog"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "Google Trust Services",
+              "organizationalUnit": null,
+              "commonName": "WE2"
+            },
+            "validFrom": "Sep 22 08:42:00 2025 GMT",
+            "validTo": "Dec 15 08:41:59 2025 GMT",
+            "fingerprint": "E9:4F:AE:49:69:8C:15:95:B2:F7:9C:C0:6F:DA:FF:C6:06:1A:22:46",
+            "serialNumber": "452387c747c5833d09183857a1ee6dd0"
+          }
+        }
+      },
+      "Request Headers": {
+        "content-type": "application/json",
+        "x-goog-api-key": "<GOOGLE_API_KEY>",
+        "x-goog-fieldmask": "routes.distanceMeters,routes.duration,routes.polyline.encodedPolyline,routes.staticDuration",
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "ed2956d4-be96-470c-a781-e2ead76ccca9",
+        "host": "routes.googleapis.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "310"
+      },
+      "Request Body": "{\n  \"origin\": { \"address\": \"Staten Island, New York, USA\" },\n  \"destination\": { \"address\": \"Queens, New York, USA\" },\n  \"travelMode\": \"DRIVE\",\n  \"routingPreference\": \"TRAFFIC_AWARE\",\n  \"computeAlternativeRoutes\": false,\n  \"routeModifiers\": { \"avoidTolls\": false, \"avoidHighways\": false },\n  \"units\": \"METRIC\"\n}",
+      "Response Headers": {
+        "content-type": "application/json; charset=UTF-8",
+        "vary": [
+          "Origin",
+          "X-Origin",
+          "Referer"
+        ],
+        "content-encoding": "gzip",
+        "date": "Fri, 10 Oct 2025 18:45:21 GMT",
+        "server": "scaffolding on HTTPServer2",
+        "x-xss-protection": "0",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "server-timing": "l2gfet4t7; dur=8",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "transfer-encoding": "chunked"
+      },
+      "Response Body": "{\n  \"routes\": [\n    {\n      \"distanceMeters\": 41311,\n      \"duration\": \"5334s\",\n      \"staticDuration\": \"2773s\",\n      \"polyline\": {\n        \"encodedPolyline\": \"kg{vFxykcMnGe@aAmYjKs@D|@GVSXYHWAWOSc@WiAG]SOSiE?gDJiDVqCNwAjBkLTaCJ}B@{BKgKgA}z@?}DJ}CT{Ch@qDn@}C`DkKnJiZxAgGn@}Df@cEX}DN_EVsXR{E^_Fl@_Fx@sEhAsEtFsRjCmK`CsKj@eD\\\\aDJmATuFB{B?uCKsBYoBcf@uxBaKud@u@uDeAkE}@qCq@{As@iAkBuBoA{@iEkBeAq@oQ}NoDeCq\\\\oXqEoDiCeBwBgAiBu@oDsAaGiBoKqC_OaE}Bg@uBQyABsAL{@R_Br@o@d@{@z@}@hAiAnBw@vA}CrGwAlCeAvAmAnA}@l@mAb@aANcADaAG_AQkAc@cAq@yAoAuLaMgIcIePyPo_BmcBqCyCmAsAaAy@qAq@wAc@}ASuAEaBHqATcC|@eClA}DzBeb@xTuB~@eA`@_@RQEcClAsCjB_D|Bk@\\\\Q@a@\\\\gAEgTaIql@aUiC}@QfAKLQx@S\\\\w@x@m@\\\\kAVoAFkAGmAQID{CaAk^}MeAo@iAiAgA}AeAuBs@oBm@aCc@_CQmBCcBDuDNiChBgTZkBf@}Ah@iAl@}@pSkUf@{@f@oA^_BN}Aj@{ZnAm`A?WO]YaB[cAe@gAk@_Au@u@w@i@cAc@uMsC_D}@kDqAcm@iYaDiBcSmLiAu@_B_BgFsFyEyGcC_EiHmM_D_GeHeNsEmJaAaBoD{FuDiIcAsCc@qBw@kEm@uDF]}AcLi@iCa@cBu@sBy@eBgAgBkMuOoCgCqB_BaMgHEYgAo@e@g@c@iAM}@?w@jBsSVsAPm@?WtAuDh@qBbCgMfAiGzA_Kb@aCl@mCv@_Ct@yAhCwDdDcGrAgCbAcCt@iCj@mCh@sDEa@TyB\\\\qHbC}k@@wCIiDUmCg@iDk@eCm@iBgAiCqEaJo@}A_AsD[kBa@aEy@uTQoCWoBy@qDyDuMgAyE}Jsf@mGkX_Pix@o@cEe@qEa@iEg@uDiAgGg@qBaCqIcB{EyC_I_JyUkGkQa@_B]kBa@yCQeCIgC@eDf@sLvBud@`@cEj@{Dj@oC`P_r@p@{DZwCVgDJ_Dz@op@N}QDgCNe@VsDLsAL{Ilg@tAZwUtHPdDYjCY\"\n      }\n    }\n  ]\n}\n"
+    }
+
+    'Calculated delay:', 43, 'minutes'
+    'Selected prompt:', 'Write an empathetic, detailed message informing a customer about a 43-minute delay. Offer reassurance.'
+
+    GET http://postman-echo.com/get: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59576
+          },
+          "remote": {
+            "address": "162.159.142.41",
+            "family": "IPv4",
+            "port": 80
+          }
+        }
+      },
+      "Request Headers": {
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "76806221-72af-47d4-9d34-5b3449b39db2",
+        "host": "postman-echo.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "cookie": "__cf_bm=OtcSyojyDWrwB.gROvonQtqjTBV2ZPl48mgIqbC_6Hs-1760121518-1.0.1.1-RsdSHtuS11HdKatAV1lm5BV6EJO_KTRp0CKgTdfHnVYQVAvSnf2xPNfmWASCNTMJ0orFAM1XR3bfk91K9lIfmzx1vByLlJ5DOk2nynO0QaM; _cfuvid=pwPIM0nhY.YUeeEyWmpP4zDKeCuCJ_1bWGXQRi.wSis-1760109496541-0.0.1.1-604800000; sails.sid=s%3AZOeYZPg74XdpAVf3bkN5dgh8_yTKzK7d.wryTYpgHlS8AxNf9kZ5EL4npTxkCM5bgi8nsXObl%2B3Y"
+      },
+      "Response Headers": {
+        "date": "Fri, 10 Oct 2025 18:45:22 GMT",
+        "content-length": "0",
+        "connection": "keep-alive",
+        "cf-ray": "98c8463baf46b0da-MAA",
+        "location": "https://postman-echo.com/get",
+        "cf-cache-status": "DYNAMIC",
+        "server": "cloudflare"
+      }
+    }
+    GET https://postman-echo.com/get: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59579
+          },
+          "remote": {
+            "address": "162.159.142.41",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": null,
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": null,
+              "organizationalUnit": null,
+              "commonName": "postman-echo.com",
+              "alternativeNames": "DNS:*.postman-echo.com, DNS:postman-echo.com"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "Let's Encrypt",
+              "organizationalUnit": null,
+              "commonName": "E8"
+            },
+            "validFrom": "Sep 28 18:01:33 2025 GMT",
+            "validTo": "Dec 27 18:01:32 2025 GMT",
+            "fingerprint": "7F:1F:80:1F:A2:E8:27:9C:43:E8:86:BE:A1:F5:B8:BF:F7:4E:9F:25",
+            "serialNumber": "06a31a8cb0f714016ac3feb61376a07b27b3"
+          }
+        }
+      },
+      "Request Headers": {
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "76806221-72af-47d4-9d34-5b3449b39db2",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "cookie": "__cf_bm=OtcSyojyDWrwB.gROvonQtqjTBV2ZPl48mgIqbC_6Hs-1760121518-1.0.1.1-RsdSHtuS11HdKatAV1lm5BV6EJO_KTRp0CKgTdfHnVYQVAvSnf2xPNfmWASCNTMJ0orFAM1XR3bfk91K9lIfmzx1vByLlJ5DOk2nynO0QaM; _cfuvid=pwPIM0nhY.YUeeEyWmpP4zDKeCuCJ_1bWGXQRi.wSis-1760109496541-0.0.1.1-604800000; sails.sid=s%3AZOeYZPg74XdpAVf3bkN5dgh8_yTKzK7d.wryTYpgHlS8AxNf9kZ5EL4npTxkCM5bgi8nsXObl%2B3Y",
+        "referer": "http://postman-echo.com/get",
+        "host": "postman-echo.com"
+      },
+      "Response Headers": {
+        "date": "Fri, 10 Oct 2025 18:45:22 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "content-encoding": "gzip",
+        "etag": "W/\"293-NiWpK7Ft10q+QkpzjGqTw1dSLA0\"",
+        "vary": "Accept-Encoding",
+        "set-cookie": "sails.sid=s%3AzR7f7iUCkYnh7D-uLKFNZRPntbqdIA1o.4VTHrRAyxxFg7rdNZwWW6TLDjIW%2BrFd%2FZFrrN2mFkzQ; Path=/; HttpOnly",
+        "x-envoy-upstream-service-time": "5",
+        "cf-cache-status": "DYNAMIC",
+        "server": "cloudflare",
+        "cf-ray": "98c8463dd9a78022-MAA"
+      },
+      "Response Body": "{\"args\":{},\"headers\":{\"host\":\"postman-echo.com\",\"accept-encoding\":\"gzip, br\",\"postman-token\":\"76806221-72af-47d4-9d34-5b3449b39db2\",\"x-forwarded-proto\":\"https\",\"accept\":\"*/*\",\"user-agent\":\"PostmanRuntime/7.48.0\",\"referer\":\"http://postman-echo.com/get\",\"cookie\":\"__cf_bm=OtcSyojyDWrwB.gROvonQtqjTBV2ZPl48mgIqbC_6Hs-1760121518-1.0.1.1-RsdSHtuS11HdKatAV1lm5BV6EJO_KTRp0CKgTdfHnVYQVAvSnf2xPNfmWASCNTMJ0orFAM1XR3bfk91K9lIfmzx1vByLlJ5DOk2nynO0QaM; _cfuvid=pwPIM0nhY.YUeeEyWmpP4zDKeCuCJ_1bWGXQRi.wSis-1760109496541-0.0.1.1-604800000; sails.sid=s%3AZOeYZPg74XdpAVf3bkN5dgh8_yTKzK7d.wryTYpgHlS8AxNf9kZ5EL4npTxkCM5bgi8nsXObl%2B3Y\"},\"url\":\"https://postman-echo.com/get\"}"
+    }
+
+
+    POST https://api.openai.com/v1/chat/completions: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59580
+          },
+          "remote": {
+            "address": "162.159.140.245",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": null,
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": null,
+              "organizationalUnit": null,
+              "commonName": "api.openai.com",
+              "alternativeNames": "DNS:api.openai.com, DNS:*.api.openai.com"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "Google Trust Services",
+              "organizationalUnit": null,
+              "commonName": "WE1"
+            },
+            "validFrom": "Sep 16 00:13:45 2025 GMT",
+            "validTo": "Dec 15 01:13:43 2025 GMT",
+            "fingerprint": "AC:76:17:47:81:3A:CD:3C:19:5A:A5:CC:7F:CB:E9:60:8F:25:94:C3",
+            "serialNumber": "e0835373e89687100e353feb0b8aff9b"
+          }
+        }
+      },
+      "Request Headers": {
+        "content-type": "application/json",
+        "authorization": "Bearer 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",
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "78a026a2-d479-4bf6-85e1-79f2591b6bc2",
+        "host": "api.openai.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "357",
+        "cookie": "__cf_bm=d38ShafxcxStbbY9FiM2qSuQ6F_aRtiPmm7S5Ra7W4I-1760121521-1.0.1.1-TgUGJOmGFfaCmhjjkXQjpAKPCEBfKL.yes6OEABvzckA8g_JFco6SytRiNiGcOpoq3V4WdGqMmWmvCq.F8gb91Pbck.06PDJoEuQUzGgz4w; _cfuvid=irsb4DaLUZrTPWs4KF2o19OSFhHTJmOVjrXj5gT3Vqc-1760109518938-0.0.1.1-604800000"
+      },
+      "Request Body": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are a traffic AI assistant crafting customer messages to give update regarding the route. Avoid adding new lines to the message\"},\n    {\"role\": \"user\", \"content\": \"Write an empathetic, detailed message informing a customer about a 43-minute delay. Offer reassurance.\"}\n  ]\n}",
+      "Response Headers": {
+        "date": "Fri, 10 Oct 2025 18:45:24 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-expose-headers": "X-Request-ID",
+        "openai-organization": "levity",
+        "openai-processing-ms": "1759",
+        "openai-project": "proj_irJLzO4PrhKzjrSg9IKTfIjw",
+        "openai-version": "2020-10-01",
+        "x-envoy-upstream-service-time": "1774",
+        "x-ratelimit-limit-project-requests": "60",
+        "x-ratelimit-limit-project-tokens": "1000",
+        "x-ratelimit-limit-requests": "30000",
+        "x-ratelimit-limit-tokens": "150000000",
+        "x-ratelimit-remaining-project-requests": "59",
+        "x-ratelimit-remaining-project-tokens": "938",
+        "x-ratelimit-remaining-requests": "29999",
+        "x-ratelimit-remaining-tokens": "149999940",
+        "x-ratelimit-reset-project-requests": "1s",
+        "x-ratelimit-reset-project-tokens": "3.72s",
+        "x-ratelimit-reset-requests": "2ms",
+        "x-ratelimit-reset-tokens": "0s",
+        "x-request-id": "req_0c68f48e5ca04199accfb62a87ea9c35",
+        "x-openai-proxy-wasm": "v0.1",
+        "cf-cache-status": "DYNAMIC",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "98c846401f747eda-MAA",
+        "content-encoding": "br",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "Response Body": "{\n  \"id\": \"chatcmpl-CPCPCKRwnSizrkuhOtggbJKBzvrAX\",\n  \"object\": \"chat.completion\",\n  \"created\": 1760121922,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"Dear Customer, we regret to inform you that due to unexpected traffic conditions, your route is experiencing a delay of approximately 43 minutes. We understand how frustrating this can be and want to assure you that we are working diligently to find the fastest alternative routes to minimize your wait. Your patience is greatly appreciated, and we are here to support you with any further assistance you may need. Thank you for your understanding.\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 54,\n    \"completion_tokens\": 82,\n    \"total_tokens\": 136,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_51db84afab\"\n}\n"
+    }
+
+    'AI message generated:', 'Dear Customer, we regret to inform you that due to unexpected traffic conditions, your route is experiencing a delay of approximately 43 minutes. We understand how frustrating this can be and want to assure you that we are working diligently to find the fastest alternative routes to minimize your wait. Your patience is greatly appreciated, and we are here to support you with any further assistance you may need. Thank you for your understanding.'
+
+
+    POST https://api.openai.com/v1/chat/completions: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59580
+          },
+          "remote": {
+            "address": "162.159.140.245",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": null,
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": null,
+              "organizationalUnit": null,
+              "commonName": "api.openai.com",
+              "alternativeNames": "DNS:api.openai.com, DNS:*.api.openai.com"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "Google Trust Services",
+              "organizationalUnit": null,
+              "commonName": "WE1"
+            },
+            "validFrom": "Sep 16 00:13:45 2025 GMT",
+            "validTo": "Dec 15 01:13:43 2025 GMT",
+            "fingerprint": "AC:76:17:47:81:3A:CD:3C:19:5A:A5:CC:7F:CB:E9:60:8F:25:94:C3",
+            "serialNumber": "e0835373e89687100e353feb0b8aff9b"
+          }
+        }
+      },
+      "Request Headers": {
+        "content-type": "application/json",
+        "authorization": "Bearer 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",
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "60aed117-cf6a-4133-85a9-2ce0f15aab1b",
+        "host": "api.openai.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "658",
+        "cookie": "__cf_bm=d38ShafxcxStbbY9FiM2qSuQ6F_aRtiPmm7S5Ra7W4I-1760121521-1.0.1.1-TgUGJOmGFfaCmhjjkXQjpAKPCEBfKL.yes6OEABvzckA8g_JFco6SytRiNiGcOpoq3V4WdGqMmWmvCq.F8gb91Pbck.06PDJoEuQUzGgz4w; _cfuvid=irsb4DaLUZrTPWs4KF2o19OSFhHTJmOVjrXj5gT3Vqc-1760109518938-0.0.1.1-604800000"
+      },
+      "Request Body": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are an evaluator scoring messages for clarity, empathy, and professionalism (1-5).\"},\n    {\"role\": \"user\", \"content\": \"Dear Customer, we regret to inform you that due to unexpected traffic conditions, your route is experiencing a delay of approximately 43 minutes. We understand how frustrating this can be and want to assure you that we are working diligently to find the fastest alternative routes to minimize your wait. Your patience is greatly appreciated, and we are here to support you with any further assistance you may need. Thank you for your understanding.\"}\n  ]\n}",
+      "Response Headers": {
+        "date": "Fri, 10 Oct 2025 18:45:27 GMT",
+        "content-type": "application/json",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-expose-headers": "X-Request-ID",
+        "openai-organization": "levity",
+        "openai-processing-ms": "2310",
+        "openai-project": "proj_irJLzO4PrhKzjrSg9IKTfIjw",
+        "openai-version": "2020-10-01",
+        "x-envoy-upstream-service-time": "2344",
+        "x-ratelimit-limit-project-requests": "60",
+        "x-ratelimit-limit-project-tokens": "1000",
+        "x-ratelimit-limit-requests": "30000",
+        "x-ratelimit-limit-tokens": "150000000",
+        "x-ratelimit-remaining-project-requests": "59",
+        "x-ratelimit-remaining-project-tokens": "836",
+        "x-ratelimit-remaining-requests": "29999",
+        "x-ratelimit-remaining-tokens": "149999862",
+        "x-ratelimit-reset-project-requests": "1s",
+        "x-ratelimit-reset-project-tokens": "9.827s",
+        "x-ratelimit-reset-requests": "2ms",
+        "x-ratelimit-reset-tokens": "0s",
+        "x-request-id": "req_c5f0effa979d43c0b22aa6a98fb5b9d4",
+        "x-openai-proxy-wasm": "v0.1",
+        "cf-cache-status": "DYNAMIC",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-ray": "98c8464d2edf7eda-MAA",
+        "content-encoding": "br",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "Response Body": "{\n  \"id\": \"chatcmpl-CPCPEn5m6ym4mHfLImJ7VxkmCQhKU\",\n  \"object\": \"chat.completion\",\n  \"created\": 1760121924,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"Score: 5\\n\\nClarity: The message clearly states the reason for the delay and provides an estimated time (43 minutes), which helps the customer understand the situation.\\n\\nEmpathy: The tone acknowledges the customer's frustration and expresses understanding, which can help to alleviate some of the discomfort caused by the delay.\\n\\nProfessionalism: The message is well-structured, polite, and offers support for any further assistance, showcasing a professional approach. Overall, it effectively communicates the necessary information while maintaining a courteous tone.\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 111,\n    \"completion_tokens\": 100,\n    \"total_tokens\": 211,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_51db84afab\"\n}\n"
+    }
+
+    'AI Evaluation Score:', 5
+    'Notification Sent'
+
+    POST https://api.twilio.com/2010-04-01/Accounts/<TWILIO_ACCOUNT_ID>/Messages.json: {
+      "Network": {
+        "addresses": {
+          "local": {
+            "address": "192.168.1.34",
+            "family": "IPv4",
+            "port": 59582
+          },
+          "remote": {
+            "address": "52.84.204.158",
+            "family": "IPv4",
+            "port": 443
+          }
+        },
+        "tls": {
+          "reused": false,
+          "authorized": true,
+          "authorizationError": null,
+          "cipher": {
+            "name": "TLS_AES_128_GCM_SHA256",
+            "standardName": "TLS_AES_128_GCM_SHA256",
+            "version": "TLSv1/SSLv3"
+          },
+          "protocol": "TLSv1.3",
+          "ephemeralKeyInfo": {},
+          "peerCertificate": {
+            "subject": {
+              "country": "US",
+              "stateOrProvince": "California",
+              "locality": "San Francisco",
+              "organization": "Twilio Inc.",
+              "organizationalUnit": null,
+              "commonName": "*.twilio.com",
+              "alternativeNames": "DNS:*.twilio.com, DNS:*.ashburn.us1.twilio.com, DNS:*.sydney.us1.twilio.com, DNS:*.dublin.us1.twilio.com, DNS:*.frankfurt.us1.twilio.com, DNS:*.tokyo.us1.twilio.com, DNS:*.osaka.us1.twilio.com, DNS:*.singapore.us1.twilio.com, DNS:*.umatilla.us1.twilio.com, DNS:*.sao-paulo.us1.twilio.com, DNS:*.ashburn.au1.twilio.com, DNS:*.sydney.au1.twilio.com, DNS:*.dublin.au1.twilio.com, DNS:*.frankfurt.au1.twilio.com, DNS:*.tokyo.au1.twilio.com, DNS:*.osaka.au1.twilio.com, DNS:*.singapore.au1.twilio.com, DNS:*.umatilla.au1.twilio.com, DNS:*.sao-paulo.au1.twilio.com, DNS:*.ashburn.ie1.twilio.com, DNS:*.sydney.ie1.twilio.com, DNS:*.dublin.ie1.twilio.com, DNS:*.frankfurt.ie1.twilio.com, DNS:*.tokyo.ie1.twilio.com, DNS:*.osaka.ie1.twilio.com, DNS:*.singapore.ie1.twilio.com, DNS:*.umatilla.ie1.twilio.com, DNS:*.sao-paulo.ie1.twilio.com, DNS:*.ashburn-ix.us1.twilio.com, DNS:*.sydney-ix.us1.twilio.com, DNS:*.london-ix.us1.twilio.com, DNS:*.frankfurt-ix.us1.twilio.com, DNS:*.tokyo-ix.us1.twilio.com, DNS:*.singapore-ix.us1.twilio.com, DNS:*.san-jose-ix.us1.twilio.com, DNS:*.osaka-ix.us1.twilio.com, DNS:*.ashburn-ix.au1.twilio.com, DNS:*.sydney-ix.au1.twilio.com, DNS:*.london-ix.au1.twilio.com, DNS:*.frankfurt-ix.au1.twilio.com, DNS:*.tokyo-ix.au1.twilio.com, DNS:*.singapore-ix.au1.twilio.com, DNS:*.san-jose-ix.au1.twilio.com, DNS:*.osaka-ix.au1.twilio.com, DNS:*.ashburn-ix.ie1.twilio.com, DNS:*.sydney-ix.ie1.twilio.com, DNS:*.london-ix.ie1.twilio.com, DNS:*.frankfurt-ix.ie1.twilio.com, DNS:*.tokyo-ix.ie1.twilio.com, DNS:*.singapore-ix.ie1.twilio.com, DNS:*.san-jose-ix.ie1.twilio.com, DNS:*.osaka-ix.ie1.twilio.com, DNS:*.us1.twilio.com, DNS:*.au1.twilio.com, DNS:*.ie1.twilio.com, DNS:*.de1.twilio.com, DNS:*.jp1.twilio.com, DNS:*.jp2.twilio.com, DNS:*.sg1.twilio.com, DNS:*.us2.twilio.com, DNS:*.br1.twilio.com, DNS:*.ing-test.ie1.twilio.com, DNS:*.ing-test.us1.twilio.com, DNS:*.ie1-ix.ie1.twilio.com, DNS:*.ie1-ix.us1.twilio.com, DNS:*.ireland.ie1.twilio.com, DNS:twilio.com, DNS:ashburn.us1.twilio.com, DNS:sydney.us1.twilio.com, DNS:dublin.us1.twilio.com, DNS:frankfurt.us1.twilio.com, DNS:tokyo.us1.twilio.com, DNS:osaka.us1.twilio.com, DNS:singapore.us1.twilio.com, DNS:umatilla.us1.twilio.com, DNS:sao-paulo.us1.twilio.com, DNS:ashburn.au1.twilio.com, DNS:sydney.au1.twilio.com, DNS:dublin.au1.twilio.com, DNS:frankfurt.au1.twilio.com, DNS:tokyo.au1.twilio.com, DNS:osaka.au1.twilio.com, DNS:singapore.au1.twilio.com, DNS:umatilla.au1.twilio.com, DNS:sao-paulo.au1.twilio.com, DNS:ashburn.ie1.twilio.com, DNS:sydney.ie1.twilio.com, DNS:dublin.ie1.twilio.com, DNS:frankfurt.ie1.twilio.com, DNS:tokyo.ie1.twilio.com, DNS:osaka.ie1.twilio.com, DNS:singapore.ie1.twilio.com, DNS:umatilla.ie1.twilio.com, DNS:sao-paulo.ie1.twilio.com, DNS:ashburn-ix.us1.twilio.com, DNS:sydney-ix.us1.twilio.com, DNS:london-ix.us1.twilio.com, DNS:frankfurt-ix.us1.twilio.com, DNS:tokyo-ix.us1.twilio.com, DNS:singapore-ix.us1.twilio.com, DNS:san-jose-ix.us1.twilio.com, DNS:osaka-ix.us1.twilio.com, DNS:ashburn-ix.au1.twilio.com, DNS:sydney-ix.au1.twilio.com, DNS:london-ix.au1.twilio.com, DNS:frankfurt-ix.au1.twilio.com, DNS:tokyo-ix.au1.twilio.com, DNS:singapore-ix.au1.twilio.com, DNS:san-jose-ix.au1.twilio.com, DNS:osaka-ix.au1.twilio.com, DNS:ashburn-ix.ie1.twilio.com, DNS:sydney-ix.ie1.twilio.com, DNS:london-ix.ie1.twilio.com, DNS:frankfurt-ix.ie1.twilio.com, DNS:tokyo-ix.ie1.twilio.com, DNS:singapore-ix.ie1.twilio.com, DNS:san-jose-ix.ie1.twilio.com, DNS:osaka-ix.ie1.twilio.com, DNS:us1.twilio.com, DNS:au1.twilio.com, DNS:ie1.twilio.com, DNS:de1.twilio.com, DNS:jp1.twilio.com, DNS:jp2.twilio.com, DNS:sg1.twilio.com, DNS:us2.twilio.com, DNS:br1.twilio.com, DNS:ing-test.ie1.twilio.com, DNS:ing-test.us1.twilio.com, DNS:ie1-ix.ie1.twilio.com, DNS:ie1-ix.us1.twilio.com, DNS:ireland.ie1.twilio.com"
+            },
+            "issuer": {
+              "country": "US",
+              "stateOrProvince": null,
+              "locality": null,
+              "organization": "DigiCert Inc",
+              "organizationalUnit": null,
+              "commonName": "DigiCert Global G2 TLS RSA SHA256 2020 CA1"
+            },
+            "validFrom": "Jan 31 00:00:00 2025 GMT",
+            "validTo": "Jan 30 23:59:59 2026 GMT",
+            "fingerprint": "55:D1:1D:CA:FD:3B:C0:E0:34:B6:23:8E:A3:04:2A:B6:8A:FB:8C:CF",
+            "serialNumber": "0ec5613024a4515380cccbde8c2f7ba1"
+          }
+        }
+      },
+      "Request Headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "authorization": "Basic QUMyYTAxZjI2ZDI3MWUyMmJlODNkZDNlMGYwOTMyYTVmODpjMDc1ZTU2MGJjM2U0YWQ0NjQ3ZThlYTc4MmUyZmI5Nw==",
+        "user-agent": "PostmanRuntime/7.48.0",
+        "accept": "*/*",
+        "postman-token": "50b21aaa-a258-4c45-861c-34a74f4fff1e",
+        "host": "api.twilio.com",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "644"
+      },
+      "Request Body": {
+        "To": "+918446004933",
+        "From": "+14786064808",
+        "Body": "Dear Customer, we regret to inform you that due to unexpected traffic conditions, your route is experiencing a delay of approximately 43 minutes. We understand how frustrating this can be and want to assure you that we are working diligently to find the fastest alternative routes to minimize your wait. Your patience is greatly appreciated, and we are here to support you with any further assistance you may need. Thank you for your understanding."
+      },
+      "Response Headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "1251",
+        "connection": "keep-alive",
+        "date": "Fri, 10 Oct 2025 18:45:27 GMT",
+        "twilio-concurrent-requests": "1",
+        "twilio-request-id": "RQf5bfd9a41b86438f661d5aef1c81f957",
+        "twilio-request-duration": "0.138",
+        "x-home-region": "us1",
+        "x-api-domain": "api.twilio.com",
+        "strict-transport-security": "max-age=31536000",
+        "x-cache": "Miss from cloudfront",
+        "via": "1.1 e97acdbdf440e4b7794b9c47e959f272.cloudfront.net (CloudFront)",
+        "x-amz-cf-pop": "BLR50-P3",
+        "x-amz-cf-id": "rQTvBxCNjoNmkesbr7ohx9HzPO8bFFBATAAgrZ50fRH0SVAAMvYLNw==",
+        "x-powered-by": "AT-5000",
+        "x-shenanigans": "none",
+        "vary": "Origin"
+      },
+      "Response Body": "{\"account_sid\": \"<TWILIO_ACCOUNT_ID>\", \"api_version\": \"2010-04-01\", \"body\": \"Sent from your Twilio trial account - Dear Customer, we regret to inform you that due to unexpected traffic conditions, your route is experiencing a delay of approximately 43 minutes. We understand how frustrating this can be and want to assure you that we are working diligently to find the fastest alternative routes to minimize your wait. Your patience is greatly appreciated, and we are here to support you with any further assistance you may need. Thank you for your understanding.\", \"date_created\": \"Fri, 10 Oct 2025 18:45:27 +0000\", \"date_sent\": null, \"date_updated\": \"Fri, 10 Oct 2025 18:45:27 +0000\", \"direction\": \"outbound-api\", \"error_code\": null, \"error_message\": null, \"from\": \"+14786064808\", \"messaging_service_sid\": null, \"num_media\": \"0\", \"num_segments\": \"4\", \"price\": null, \"price_unit\": \"USD\", \"sid\": \"SMf5bfd9a41b86438f661d5aef1c81f957\", \"status\": \"queued\", \"subresource_uris\": {\"media\": \"/2010-04-01/Accounts/<TWILIO_ACCOUNT_ID>/Messages/SMf5bfd9a41b86438f661d5aef1c81f957/Media.json\"}, \"to\": \"+918446004933\", \"uri\": \"/2010-04-01/Accounts/<TWILIO_ACCOUNT_ID>/Messages/SMf5bfd9a41b86438f661d5aef1c81f957.json\"}"
+    }
