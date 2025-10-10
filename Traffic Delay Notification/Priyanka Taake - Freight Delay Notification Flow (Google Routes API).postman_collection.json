@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "c60c54ce-15a0-43c0-a091-01ab3d4b21aa",
+		"name": "Priyanka Taake - Freight Delay Notification Flow (Google Routes API)",
+		"description": "Workflow using Google Routes API to detect delays, generate AI messages, evaluate quality, and send notifications.\n\nGet Traffic Data - To get data from google maps API , parameters like route duration, route static duration to calculate delay.\n\nAI prompt Preparation - Based on delay , creating AI promt and storing it in a variable.\n\nAI message Generation - Based on the promt created, a message will be generated mentioning the delay time. Sentinments and tone will be added as per the delay time. eg. if delay time is more than 30 mins , more empathetic tone will be added.\n\nAI Quality Evaluation - Quality of the message will be evaluated and scored. If the score is 4 or above, only then the message will be sent.\n\nSend Notification - SMS notification as per the drafted AI message is sent to mentioned phone number stored in environment vairables.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49176545",
+		"_collection_link": "https://priyanka-take22-4686616.postman.co/workspace/6915d976-8f81-4728-8bb9-961e32ef1ace/collection/49176545-c60c54ce-15a0-43c0-a091-01ab3d4b21aa?action=share&source=collection_link&creator=49176545"
+	},
+	"item": [
+		{
+			"name": "Get Traffic Data (Google Routes API)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"let route = response.routes && response.routes[0];",
+							"if (!route) {",
+							"  console.log('No route data found. Using default delay.');",
+							"  pm.environment.set('delayMinutes', 45);",
+							"  pm.execution.setNextRequest('AI Prompt Preparation');",
+							"} else {",
+							"  function parseDuration(iso) {",
+							"    // Accepts ISO8601 duration (e.g., 'PT1H30M', '5250s', '2773s')",
+							"    if (typeof iso === 'string') {",
+							"      if (iso.endsWith('s')) {",
+							"        // Handle seconds (e.g., '5250s')",
+							"        let seconds = parseInt(iso.replace('s', ''), 10);",
+							"        return Math.round(seconds / 60);",
+							"      }",
+							"      // Handle ISO8601 (e.g., 'PT1H30M')",
+							"      const match = iso.match(/PT(?:(\\d+)H)?(?:(\\d+)M)?/);",
+							"      const hours = parseInt(match?.[1] || 0);",
+							"      const minutes = parseInt(match?.[2] || 0);",
+							"      return hours * 60 + minutes;",
+							"    }",
+							"    return 0;",
+							"  }",
+							"  let trafficTime = parseDuration(route.duration || 'PT0M');",
+							"  let normalTime = parseDuration(route.staticDuration || route.duration || 'PT0M');",
+							"  let delay = Math.max(trafficTime - normalTime, 0);",
+							"  pm.environment.set('delayMinutes', delay);",
+							"  console.log('Calculated delay:', delay, 'minutes');",
+							"  if (delay <= parseInt(pm.environment.get('delay_threshold'))) {",
+							"    console.log('Delay below threshold. Workflow ends.');",
+							"    pm.execution.setNextRequest(null);",
+							"  } else {",
+							"    pm.execution.setNextRequest('AI Prompt Preparation');",
+							"  }",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Goog-Api-Key",
+						"value": "{{google_api_key}}"
+					},
+					{
+						"key": "X-Goog-FieldMask",
+						"value": "routes.distanceMeters,routes.duration,routes.polyline.encodedPolyline,routes.staticDuration"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"origin\": { \"address\": \"{{origin}}\" },\n  \"destination\": { \"address\": \"{{destination}}\" },\n  \"travelMode\": \"DRIVE\",\n  \"routingPreference\": \"TRAFFIC_AWARE\",\n  \"computeAlternativeRoutes\": false,\n  \"routeModifiers\": { \"avoidTolls\": false, \"avoidHighways\": false },\n  \"units\": \"METRIC\"\n}"
+				},
+				"url": {
+					"raw": "https://routes.googleapis.com/directions/v2:computeRoutes",
+					"protocol": "https",
+					"host": [
+						"routes",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"directions",
+						"v2:computeRoutes"
+					]
+				},
+				"description": "Gets traffic data using google maps API. Calculate delay time based on static duration vs current duration of the route specified."
+			},
+			"response": []
+		},
+		{
+			"name": "AI Prompt Preparation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let delay = parseInt(pm.environment.get('delayMinutes'));",
+							"let prompt = '';",
+							"if (delay <= 20) {",
+							"  prompt = `Write a short, friendly message informing a customer of a ${delay}-minute delay.`;",
+							"} else if (delay <= 60) {",
+							"  prompt = `Write an empathetic, detailed message informing a customer about a ${delay}-minute delay. Offer reassurance.`;",
+							"} else {",
+							"  prompt = `Write a highly empathetic and proactive message for a ${delay}-minute delivery delay. Offer compensation or next steps.`;",
+							"}",
+							"pm.environment.set('aiPrompt', prompt);",
+							"console.log('Selected prompt:', prompt);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.execution.setNextRequest('AI Message Generation');"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "postman-echo.com/get",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				},
+				"description": "Generate promt with appropriate sentiments based on the traffic delay time."
+			},
+			"response": []
+		},
+		{
+			"name": "AI Message Generation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let aiResponse = pm.response.json();",
+							"let message = aiResponse.choices[0].message.content;",
+							"pm.environment.set('aiMessage', message);",
+							"console.log('AI message generated:', message);",
+							"pm.execution.setNextRequest('AI Quality Evaluation');"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ai_api_key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ai_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are a traffic AI assistant crafting customer messages to give update regarding the route. Avoid adding new lines to the message\"},\n    {\"role\": \"user\", \"content\": \"{{aiPrompt}}\"}\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://api.openai.com/v1/chat/completions",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openai",
+						"com"
+					],
+					"path": [
+						"v1",
+						"chat",
+						"completions"
+					]
+				},
+				"description": "Generate a message to be sent via SMS form the prompt generated."
+			},
+			"response": []
+		},
+		{
+			"name": "AI Quality Evaluation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let evalResponse = pm.response.json();",
+							"let evaluationText = evalResponse.choices[0].message.content;",
+							"let match = evaluationText.match(/\\d+/);",
+							"let score = match ? parseInt(match[0]) : 3;",
+							"pm.environment.set('aiScore', score);",
+							"console.log('AI Evaluation Score:', score);",
+							"if (score >= 4) {",
+							"    pm.execution.setNextRequest('Send Notification');",
+							"    console.log('Notification Sent');",
+							"} else {",
+							"    console.log('Score below 4. Skipping notification.');",
+							"    pm.execution.setNextRequest(null);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{ai_api_key}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ai_api_key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are an evaluator scoring messages for clarity, empathy, and professionalism (1-5).\"},\n    {\"role\": \"user\", \"content\": \"{{aiMessage}}\"}\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://api.openai.com/v1/chat/completions",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openai",
+						"com"
+					],
+					"path": [
+						"v1",
+						"chat",
+						"completions"
+					]
+				},
+				"description": "Score the message generated via prompt based on parameters like Clarity ,Empathy and Tone and Professionalism. The SMS will be sent only if score is 4 or above."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Notification",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{twilio_api_key}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{twilio_user}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "To",
+							"value": "+918446004933",
+							"type": "text"
+						},
+						{
+							"key": "From",
+							"value": "+14786064808",
+							"type": "text"
+						},
+						{
+							"key": "Body",
+							"value": "{{aiMessage}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.twilio.com/2010-04-01/Accounts/AC2a01f26d271e22be83dd3e0f0932a5f8/Messages.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twilio",
+						"com"
+					],
+					"path": [
+						"2010-04-01",
+						"Accounts",
+						"AC2a01f26d271e22be83dd3e0f0932a5f8",
+						"Messages.json"
+					]
+				},
+				"description": "Send the message via twilio SMS api."
+			},
+			"response": []
+		}
+	]
+}
